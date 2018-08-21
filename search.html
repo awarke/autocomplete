@@ -1,0 +1,93 @@
+<html>
+
+   <head>
+
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+     <title>Autocomplete Demo</title>
+
+     <style type="text/css">
+     
+@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates);
+
+* {
+    margin:0;
+    padding:0;
+    font:12pt Arial;
+}
+
+body {
+  background-color:#ccd9ff;
+}
+
+.field {
+  display:flex;
+  position:realtive;
+  margin:5em auto;
+  width:70%;
+  flex-direction:row;
+  box-shadow:
+   1px 1px 0 rgb(22, 160, 133),
+   2px 2px 0 rgb(22, 160, 133),
+   3px 3px 0 rgb(22, 160, 133),
+   4px 4px 0 rgb(22, 160, 133),
+   5px 5px 0 rgb(22, 160, 133),
+   6px 6px 0 rgb(22, 160, 133),
+   7px 7px 0 rgb(22, 160, 133)
+  ;
+}
+
+.field>input[type=text],
+.field>button {
+  display:block;
+  font:1.2em 'Arial';
+}
+
+.field>input[type=text] {
+  flex:1;
+  padding:0.6em;
+  border:0.2em solid rgb(51, 102, 0);
+}
+
+.field>button {
+  padding:0.6em 0.8em;
+  background-color:rgb(51, 102, 0);
+  color:white;
+  border:none;
+}
+
+</style>
+</head>
+<body>
+
+<div class="field" id="searchform">
+  <input type="text" id="searchterm" placeholder="Enter the product name" />
+  <button type="button" id="search">Search</button>
+</div>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+$("#searchterm").autocomplete({
+    source: function (request, response) {
+        $.ajax({
+            type: "POST",
+            url: "/data",
+            dataType: "json",
+            data: {
+                term: request.term
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Error: ' + xhr.responseText);
+            },
+            success: function (data) {
+                response( data );
+            }
+        });
+    }
+});
+
+</script>
+</body>
+</html>
