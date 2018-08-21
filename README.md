@@ -1,4 +1,4 @@
-Google Cloud Platform - Autocomplete  
+# Google Cloud Platform - Autocomplete  
 
 1. AppEngine to store front end html and Nodejs app.js file using express.
 2. Redis Labs hosted Memcached cloud used for caching query results. This is to improve product name completion time and provide suggestions in real time, with low-latency.
